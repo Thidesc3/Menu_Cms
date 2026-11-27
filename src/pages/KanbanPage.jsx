@@ -1,0 +1,1 @@
+import {Alert} from '../components/ui';export default function KanbanPage(){return <Alert>Funcionalidade em desenvolvimento.</Alert>}

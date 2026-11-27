@@ -1,0 +1,1 @@
+import {Alert} from '../components/ui';export default function GuestChecksPage(){return <Alert>Funcionalidade em desenvolvimento.</Alert>}
