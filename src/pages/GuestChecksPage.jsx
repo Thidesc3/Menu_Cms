@@ -1,1 +1,9 @@
-import {Alert} from '../components/ui';export default function GuestChecksPage(){return <Alert>Funcionalidade em desenvolvimento.</Alert>}
+import {useState} from 'react'
+import {useQuery} from '@tanstack/react-query'
+import {guestChecks,orders} from '../services/api'
+import {money,date} from '../lib/utils'
+import {Button,Table,TableHeader,TableBody,TableRow,TableHead,TableCell} from '../components/ui'
+import {QueryState} from '../components/CrudPage'
+import OrderCard from '../components/OrderCard'
+function Detail({check,onBack}){const q=useQuery({queryKey:['orders',check.id],queryFn:()=>orders.list(check.id),refetchInterval:15000});return <section><Button variant="outline" onClick={onBack}>Voltar às comandas</Button><h1 className="mt-4 text-3xl font-bold">{check.spot?.name??'Comanda'}</h1><p className="mb-5 text-slate-500">Aberta em {date(check.createdAt)}</p><QueryState query={q} empty="Nenhum pedido nesta comanda."/><div className="grid gap-4">{q.data?.map(o=><OrderCard key={o.id} order={o}/>)}</div></section>}
+export default function GuestChecksPage(){const [id,setId]=useState(null);const q=useQuery({queryKey:['guestChecks'],queryFn:guestChecks.list,refetchInterval:15000});const rows=(q.data??[]).filter(c=>c.status==='OPENED');const check=rows.find(c=>c.id===id);if(check)return <Detail check={check} onBack={()=>setId(null)}/>;return <section><h1 className="text-3xl font-bold">Comandas abertas</h1><p className="mb-5 text-sm text-slate-500">Acompanhe as mesas e seus pedidos.</p><QueryState query={q} empty="Nenhuma comanda aberta."/>{rows.length>0&&<Table><TableHeader><TableRow>{['Mesa','Abertura','Total acumulado','Ações'].map(t=><TableHead key={t}>{t}</TableHead>)}</TableRow></TableHeader><TableBody>{rows.map(c=><TableRow key={c.id}><TableCell>{c.spot?.name}</TableCell><TableCell>{date(c.createdAt)}</TableCell><TableCell>{money(c.total)}</TableCell><TableCell><Button onClick={()=>setId(c.id)}>Ver pedidos</Button></TableCell></TableRow>)}</TableBody></Table>}</section>}
