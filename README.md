@@ -14,16 +14,21 @@ Requisitos: Node.js 20+, npm e PostgreSQL para o backend.
 
 ## Stack
 
-Vite, React, Tailwind CSS, Axios, TanStack Query e componentes locais baseados no padrão shadcn/ui. Dependências adicionais: Radix Dialog/Select (primitivas acessíveis), clsx e tailwind-merge (composição de classes), lucide-react (ícones), sonner (feedback de operações) e @dnd-kit/core (Kanban com arrastar e soltar).
+Vite, React, Tailwind CSS, Axios, TanStack Query e shadcn/ui (componentes oficiais New York v4, com imports adaptados à estrutura do projeto). Dependências adicionais: radix-ui (primitivas acessíveis do shadcn/ui), class-variance-authority (variantes dos componentes), clsx e tailwind-merge (composição de classes), lucide-react (ícones), tw-animate-css (animações dos componentes), sonner (feedback de operações) e @dnd-kit/core (Kanban com arrastar e soltar).
 
 ## Organização
 
 - src/pages: páginas administrativas.
 - src/components: componentes reutilizáveis, formulários e estados.
+- src/components/ui: componentes oficiais shadcn/ui e fachada de integração em src/components/ui.jsx.
 - src/services/api.js: única instância Axios e serviços REST.
 - src/lib: utilitários de formatação.
 
 Todas as leituras usam useQuery. Gravações usam useMutation e invalidam as consultas afetadas. O Kanban usa a mesma mutação dos pedidos; o status vem da API, sem armazenamento local.
+
+## Visão geral
+
+O dashboard consulta categorias, produtos, mesas, comandas abertas e pedidos usando as mesmas chaves do TanStack Query das demais telas. O total em aberto é a soma das comandas OPENED; os pedidos recentes e contagens por status são calculados a partir da API. Nenhum registro é fixado no código.
 
 ## Validação necessária antes da entrega
 
