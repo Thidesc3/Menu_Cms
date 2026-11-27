@@ -35,6 +35,4 @@ Todas as leituras usam useQuery. Gravações usam useMutation e invalidam as con
 
 O código foi preparado para integração; os testes com banco e navegador precisam ser executados no ambiente local.
 
-## Referências
 
-Estrutura de API consultada: https://github.com/joaohupalo/menu-backend. Interface baseada na stack solicitada na disciplina. 
