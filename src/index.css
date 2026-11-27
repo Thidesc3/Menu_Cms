@@ -1,4 +1,18 @@
 @import "tailwindcss";
-@theme { --color-background: #f8fafc; --color-foreground: #172033; --color-primary: #166534; --color-muted: #eef2f6; --color-border: #dce3eb; }
-body { margin:0; font-family: system-ui,sans-serif; background:var(--color-background);color:var(--color-foreground); }
-button:disabled { opacity:.5; cursor:not-allowed; }
+@import "tw-animate-css";
+@theme {
+ --color-background:#f5f7fa; --color-foreground:#182333;
+ --color-primary:#166534; --color-primary-foreground:#fff;
+ --color-muted:#eef2f6; --color-muted-foreground:#64748b;
+ --color-border:#dce3eb; --color-input:#d4dce5;
+ --color-card:#fff; --color-card-foreground:#182333;
+ --color-popover:#fff; --color-popover-foreground:#182333;
+ --color-secondary:#e8edf2; --color-secondary-foreground:#334155;
+ --color-accent:#e8f3eb; --color-accent-foreground:#166534;
+ --color-destructive:#b91c1c; --color-ring:#16a34a;
+}
+body { margin:0; font-family:system-ui,sans-serif; background:var(--color-background); color:var(--color-foreground); }
+button:disabled {cursor:not-allowed}
+[data-slot="table-container"] {border:1px solid var(--color-border);border-radius:12px;background:white;}
+[data-slot="table-header"] {background:var(--color-muted);}
+[data-slot="table-cell"],[data-slot="table-head"] {padding:12px 16px;}
